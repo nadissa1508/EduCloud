@@ -1,0 +1,182 @@
+==================================================================
+PRUEBA: Ventas a Ventas (misma subred) | qr-vm-ventas-01 -> 10.20.0.11 | Esperado: EXITO
+==================================================================
+WARNING: The private SSH key file for gcloud does not exist.
+WARNING: The public SSH key file for gcloud does not exist.
+WARNING: You do not have an SSH key for gcloud.
+WARNING: SSH keygen will be executed to generate a key.
+Generating public/private rsa key pair.
+Your identification has been saved in /home/dulceambrosio2005/.ssh/google_compute_engine
+Your public key has been saved in /home/dulceambrosio2005/.ssh/google_compute_engine.pub
+The key fingerprint is:
+SHA256:qOowUTrk1ziSavK6HJHPP8d4jsJ4kgK2ARCOLG0cVS8 dulceambrosio2005@cs-74705213786-default
+The key's randomart image is:
++---[RSA 3072]----+
+|.......          |
+|=o .   .         |
+|++=   E .        |
+|=+o o  o         |
+|=* + .. S        |
+|o=* ..           |
+|Bo*o. o          |
+|=O.=.o.+         |
+|+=* .o=.         |
++----[SHA256]-----+
+Updating project ssh metadata...
+.........Updated [https://www.googleapis.com/compute/v1/projects/educloud-512223].
+done.
+Waiting for SSH key to propagate.
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+Warning: Permanently added 'compute.505949761836528741' (ED25519) to the list of known hosts.
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+qr-vm-ventas-01
+ens4             UP             10.20.0.10/32 metric 100 
+PING 10.20.0.11 (10.20.0.11) 56(84) bytes of data.
+64 bytes from 10.20.0.11: icmp_seq=1 ttl=64 time=1.60 ms
+64 bytes from 10.20.0.11: icmp_seq=2 ttl=64 time=0.322 ms
+64 bytes from 10.20.0.11: icmp_seq=3 ttl=64 time=0.354 ms
+64 bytes from 10.20.0.11: icmp_seq=4 ttl=64 time=0.324 ms
+
+--- 10.20.0.11 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3056ms
+rtt min/avg/max/mdev = 0.322/0.649/1.597/0.547 ms
+
+==================================================================
+PRUEBA: Ventas a Ventas (sentido inverso) | qr-vm-ventas-02 -> 10.20.0.10 | Esperado: EXITO
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+Warning: Permanently added 'compute.3433337949678580853' (ED25519) to the list of known hosts.
+qr-vm-ventas-02
+ens4             UP             10.20.0.11/32 metric 100 
+PING 10.20.0.10 (10.20.0.10) 56(84) bytes of data.
+64 bytes from 10.20.0.10: icmp_seq=1 ttl=64 time=0.292 ms
+64 bytes from 10.20.0.10: icmp_seq=2 ttl=64 time=0.342 ms
+64 bytes from 10.20.0.10: icmp_seq=3 ttl=64 time=0.468 ms
+64 bytes from 10.20.0.10: icmp_seq=4 ttl=64 time=0.331 ms
+
+--- 10.20.0.10 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3056ms
+rtt min/avg/max/mdev = 0.292/0.358/0.468/0.066 ms
+
+==================================================================
+PRUEBA: TI a Data Center | qr-vm-ti-01 -> 10.20.0.162 | Esperado: EXITO
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+Warning: Permanently added 'compute.330726056916268102' (ED25519) to the list of known hosts.
+qr-vm-ti-01
+ens4             UP             10.20.0.130/32 metric 100 
+PING 10.20.0.162 (10.20.0.162) 56(84) bytes of data.
+64 bytes from 10.20.0.162: icmp_seq=1 ttl=64 time=1.90 ms
+64 bytes from 10.20.0.162: icmp_seq=2 ttl=64 time=0.354 ms
+64 bytes from 10.20.0.162: icmp_seq=3 ttl=64 time=0.330 ms
+64 bytes from 10.20.0.162: icmp_seq=4 ttl=64 time=0.313 ms
+
+--- 10.20.0.162 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3038ms
+rtt min/avg/max/mdev = 0.313/0.725/1.904/0.680 ms
+
+==================================================================
+PRUEBA: TI a Ventas (administracion) | qr-vm-ti-01 -> 10.20.0.10 | Esperado: EXITO
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+qr-vm-ti-01
+ens4             UP             10.20.0.130/32 metric 100 
+PING 10.20.0.10 (10.20.0.10) 56(84) bytes of data.
+64 bytes from 10.20.0.10: icmp_seq=1 ttl=64 time=1.42 ms
+64 bytes from 10.20.0.10: icmp_seq=2 ttl=64 time=0.522 ms
+64 bytes from 10.20.0.10: icmp_seq=3 ttl=64 time=0.355 ms
+64 bytes from 10.20.0.10: icmp_seq=4 ttl=64 time=0.393 ms
+
+--- 10.20.0.10 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3031ms
+rtt min/avg/max/mdev = 0.355/0.673/1.422/0.436 ms
+
+==================================================================
+PRUEBA: Ventas a Data Center | qr-vm-ventas-01 -> 10.20.0.162 | Esperado: EXITO
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+qr-vm-ventas-01
+ens4             UP             10.20.0.10/32 metric 100 
+PING 10.20.0.162 (10.20.0.162) 56(84) bytes of data.
+64 bytes from 10.20.0.162: icmp_seq=1 ttl=64 time=1.76 ms
+64 bytes from 10.20.0.162: icmp_seq=2 ttl=64 time=0.425 ms
+64 bytes from 10.20.0.162: icmp_seq=3 ttl=64 time=0.477 ms
+64 bytes from 10.20.0.162: icmp_seq=4 ttl=64 time=0.341 ms
+
+--- 10.20.0.162 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3037ms
+rtt min/avg/max/mdev = 0.341/0.751/1.761/0.585 ms
+
+==================================================================
+PRUEBA: Ventas a TI | qr-vm-ventas-01 -> 10.20.0.130 | Esperado: FALLA (100% loss)
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+qr-vm-ventas-01
+ens4             UP             10.20.0.10/32 metric 100 
+PING 10.20.0.130 (10.20.0.130) 56(84) bytes of data.
+
+--- 10.20.0.130 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3053ms
+
+
+==================================================================
+PRUEBA: Visitas a Ventas | qr-vm-visitas-01 -> 10.20.0.10 | Esperado: FALLA (100% loss)
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+Warning: Permanently added 'compute.8272192038296204327' (ED25519) to the list of known hosts.
+qr-vm-visitas-01
+ens4             UP             10.20.0.70/32 metric 100 
+PING 10.20.0.10 (10.20.0.10) 56(84) bytes of data.
+
+--- 10.20.0.10 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3066ms
+
+
+==================================================================
+PRUEBA: Visitas a Data Center | qr-vm-visitas-01 -> 10.20.0.162 | Esperado: FALLA (100% loss)
+==================================================================
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+qr-vm-visitas-01
+ens4             UP             10.20.0.70/32 metric 100 
+PING 10.20.0.162 (10.20.0.162) 56(84) bytes of data.
+
+--- 10.20.0.162 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3067ms
+
+
