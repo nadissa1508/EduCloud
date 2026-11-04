@@ -1,0 +1,28 @@
+// /etc/bind/named.conf.options - Opciones globales de BIND9 (qr-vm-dc-01, EduCloud)
+
+// Quienes pueden consultar este servidor: subredes de empleados y los
+// reenviadores de Cloud DNS. Visitas y la DMZ quedan fuera.
+acl "redes-internas" {
+    localhost;
+    10.20.0.0/26;       // Ventas
+    10.20.0.128/27;     // TI
+    10.20.0.160/28;     // Data Center
+    35.199.192.0/19;    // Reenviadores de Cloud DNS (zona de reenvio privada)
+};
+
+options {
+    directory "/var/cache/bind";
+
+    listen-on { any; };
+    listen-on-v6 { none; };
+
+    // Solo autoritativo: responde unicamente por educloud.local.
+    // Los nombres de Internet los resuelve el DNS de GCP (169.254.169.254).
+    recursion no;
+
+    allow-query { redes-internas; };
+    allow-transfer { none; };       // nadie puede copiar la zona completa (AXFR)
+
+    version "no disponible";        // hardening: no revelar la version de BIND
+    dnssec-validation auto;
+};

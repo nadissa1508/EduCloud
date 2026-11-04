@@ -1,0 +1,24 @@
+; /etc/bind/db.educloud.local - Zona interna de EduCloud
+$TTL 300                                ; las respuestas se guardan en cache 5 minutos
+@   IN  SOA ns1.educloud.local. admin.educloud.local. (
+        2026110201  ; Serial: AAAAMMDDNN, se incrementa en cada cambio
+        3600        ; Refresh: cada cuanto un secundario revisa cambios
+        900         ; Retry: reintento si el refresh falla
+        604800      ; Expire: un secundario deja de responder tras 7 dias sin contacto
+        300 )       ; TTL negativo: cache de respuestas "no existe"
+
+; Servidor de nombres de la zona
+@           IN  NS      ns1.educloud.local.
+ns1         IN  A       10.20.0.162
+
+; Servidores
+dc-01       IN  A       10.20.0.162
+rrhh        IN  A       10.20.0.163     ; Intranet de RR. HH. (qr-vm-intranet)
+intranet    IN  CNAME   rrhh            ; alias de la intranet
+web-dmz     IN  A       10.20.0.178     ; Web publica de Ventas (IP interna en la DMZ)
+
+; Equipos de prueba
+ventas-01   IN  A       10.20.0.10
+ventas-02   IN  A       10.20.0.11
+ti-01       IN  A       10.20.0.130
+visitas-01  IN  A       10.20.0.70

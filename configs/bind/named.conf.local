@@ -1,0 +1,7 @@
+// /etc/bind/named.conf.local - Zonas propias de EduCloud
+
+zone "educloud.local" {
+    type master;                          // servidor primario (autoritativo) de la zona
+    file "/etc/bind/db.educloud.local";
+    allow-query { redes-internas; };
+};
