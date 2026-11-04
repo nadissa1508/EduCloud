@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet RR. HH. | EduCloud</title>
+  <style>
+    :root { --azul: #1f4e79; --azul-claro: #e8f0f8; --gris: #5b6470; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f9; color: #1d2329; }
+    header { background: var(--azul); color: #fff; padding: 20px 32px; }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    header p { margin: 4px 0 0; opacity: .85; }
+    .aviso { background: #fff4d6; border-left: 5px solid #e0a800; padding: 12px 32px; font-size: .95rem; }
+    main { max-width: 960px; margin: 24px auto; padding: 0 16px; display: grid; gap: 16px;
+           grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .tarjeta { background: #fff; border-radius: 8px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .tarjeta h2 { margin-top: 0; font-size: 1.1rem; color: var(--azul); }
+    ul { padding-left: 18px; margin: 0; }
+    li { margin: 6px 0; }
+    footer { text-align: center; color: var(--gris); font-size: .85rem; padding: 24px 16px; }
+    code { background: var(--azul-claro); padding: 1px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EduCloud · Intranet de Recursos Humanos</h1>
+    <p>Portal interno para colaboradores de EduCloud</p>
+  </header>
+
+  <div class="aviso">
+    🔒 Sitio de uso <strong>exclusivo interno</strong>. Solo es accesible desde las redes de Ventas, TI y Data Center.
+    No está publicado en Internet ni disponible para la red de Visitas.
+  </div>
+
+  <main>
+    <section class="tarjeta">
+      <h2>📢 Avisos</h2>
+      <ul>
+        <li>Pago de planilla: último día hábil de cada mes.</li>
+        <li>Capacitación obligatoria de seguridad de la información: 20 de noviembre.</li>
+        <li>Actualiza tus datos personales antes del cierre de año.</li>
+      </ul>
+    </section>
+
+    <section class="tarjeta">
+      <h2>📄 Trámites</h2>
+      <ul>
+        <li>Solicitud de vacaciones</li>
+        <li>Constancia laboral</li>
+        <li>Reporte de horas de capacitadores</li>
+        <li>Reembolso de viáticos por visitas a colegios</li>
+      </ul>
+    </section>
+
+    <section class="tarjeta">
+      <h2>📞 Contacto RR. HH.</h2>
+      <ul>
+        <li>Extensión interna: 2050</li>
+        <li>Correo: rrhh@educloud.local</li>
+        <li>Horario: lunes a viernes, 8:00 – 17:00</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Servido por <code>qr-vm-intranet</code> (10.20.0.163) · Resuelto por el DNS interno como
+    <code>rrhh.educloud.local</code> · CC3067 Redes – Proyecto Final Fase 2
+  </footer>
+</body>
+</html>
