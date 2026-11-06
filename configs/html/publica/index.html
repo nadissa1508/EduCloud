@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduCloud | Plataforma educativa para colegios</title>
+  <style>
+    :root { --azul: #1f4e79; --verde: #2e8b57; --claro: #eef4fa; --gris: #5b6470; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #1d2329; background: #fff; }
+    header { background: linear-gradient(135deg, var(--azul), #2d6ca2); color: #fff; padding: 56px 24px; text-align: center; }
+    header h1 { margin: 0 0 8px; font-size: 2.2rem; }
+    header p { margin: 0 auto; max-width: 640px; font-size: 1.1rem; opacity: .92; }
+    .boton { display: inline-block; margin-top: 22px; background: #fff; color: var(--azul); padding: 12px 26px;
+             border-radius: 6px; font-weight: 600; text-decoration: none; }
+    section { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    h2 { color: var(--azul); text-align: center; margin-top: 0; }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .tarjeta { background: var(--claro); border-radius: 10px; padding: 20px; }
+    .tarjeta h3 { margin-top: 0; color: var(--azul); }
+    .precio { font-size: 1.6rem; font-weight: 700; color: var(--verde); margin: 6px 0; }
+    ul { padding-left: 18px; margin: 0; }
+    li { margin: 5px 0; }
+    .contacto { background: var(--claro); text-align: center; }
+    footer { text-align: center; color: var(--gris); font-size: .85rem; padding: 20px; border-top: 1px solid #e3e7ec; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EduCloud</h1>
+    <p>La plataforma educativa en la nube para colegios: aulas virtuales, seguimiento académico
+       y comunicación con padres de familia en un solo lugar.</p>
+    <a class="boton" href="#contacto">Solicitar una demostración</a>
+  </header>
+
+  <section>
+    <h2>¿Qué ofrece EduCloud a su institución?</h2>
+    <div class="grid">
+      <div class="tarjeta"><h3>📚 Aulas virtuales</h3>Cursos, tareas y evaluaciones en línea para cada grado.</div>
+      <div class="tarjeta"><h3>📊 Seguimiento académico</h3>Notas, asistencia y reportes para docentes y dirección.</div>
+      <div class="tarjeta"><h3>👨‍👩‍👧 Portal de padres</h3>Comunicación directa y avisos del colegio en tiempo real.</div>
+      <div class="tarjeta"><h3>🎓 Capacitación incluida</h3>Nuestros capacitadores visitan su colegio para la implementación.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Planes para instituciones</h2>
+    <div class="grid">
+      <div class="tarjeta"><h3>Básico</h3><div class="precio">Q 15</div>por estudiante / mes
+        <ul><li>Aulas virtuales</li><li>Hasta 300 estudiantes</li><li>Soporte por correo</li></ul></div>
+      <div class="tarjeta"><h3>Institucional</h3><div class="precio">Q 12</div>por estudiante / mes
+        <ul><li>Todo lo del plan Básico</li><li>Portal de padres</li><li>2 capacitaciones presenciales</li></ul></div>
+      <div class="tarjeta"><h3>Red de colegios</h3><div class="precio">A convenir</div>varias sedes
+        <ul><li>Todo lo del plan Institucional</li><li>Reportes consolidados</li><li>Asesor dedicado</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <h2>Contacte a nuestro equipo de ventas</h2>
+    <p>Agende una visita de nuestros asesores a su colegio.</p>
+    <p>📧 ventas@educloud.dulceambrosio.me · ☎ +502 2200-0000</p>
+  </section>
+
+  <footer>
+    © 2026 EduCloud · Sitio público servido desde la DMZ (<code>qr-vm-web-dmz</code>) con HTTPS · CC3067 Redes – Proyecto Final Fase 2
+  </footer>
+</body>
+</html>
