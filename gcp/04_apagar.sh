@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-# Detiene las instancias (deja de cobrar CPU/RAM; el disco sigue cobrando centavos al mes).
+# Detiene TODAS las instancias encendidas del proyecto (deja de cobrar CPU/RAM; el disco sigue cobrando centavos al mes).
 set -euo pipefail
 source "$(dirname "$0")/config.env"
 gcloud config set project "$PROJECT_ID"
-gcloud compute instances stop qr-vm-ventas-01 qr-vm-ventas-02 qr-vm-ti-01 qr-vm-dc-01 qr-vm-visitas-01 --zone="$ZONE"
-# Para volver a encenderlas:
-# gcloud compute instances start qr-vm-ventas-01 qr-vm-ventas-02 qr-vm-ti-01 qr-vm-dc-01 qr-vm-visitas-01 --zone="$ZONE"
+ENCENDIDAS=$(gcloud compute instances list --filter="status=RUNNING" --format="value(name)")
+if [ -z "$ENCENDIDAS" ]; then echo "No hay VMs encendidas."; exit 0; fi
+echo ">> Apagando: $ENCENDIDAS"
+gcloud compute instances stop $ENCENDIDAS --zone="$ZONE"
+# Para volver a encender una o varias:
+# gcloud compute instances start qr-vm-ventas-01 qr-vm-dc-01 --zone="$ZONE"
