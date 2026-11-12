@@ -1,0 +1,151 @@
+EduCloud - Fase 2 - Matriz de pruebas final
+Fecha: 2026-11-05 02:39 UTC   Proyecto: educloud-512223
+
+################ DNS interno ################
+
+=== Prueba 1: Ventas resuelve la intranet por DNS interno
+    Desde: qr-vm-ventas-01   |   Esperado: 10.20.0.163
+    $ dig +short rrhh.educloud.local
+    10.20.0.163
+
+=== Prueba 2: Alias CNAME de la intranet
+    Desde: qr-vm-ventas-01   |   Esperado: rrhh.educloud.local. + 10.20.0.163
+    $ dig +short intranet.educloud.local
+    rrhh.educloud.local.
+    10.20.0.163
+
+=== Prueba 3: BIND no hace recursion (hardening)
+    Desde: qr-vm-dc-01   |   Esperado: status: REFUSED
+    $ dig @127.0.0.1 www.google.com | grep status
+    ;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 28991
+
+################ Intranet RR. HH. ################
+
+=== Prueba 4: Ventas accede a la intranet
+    Desde: qr-vm-ventas-01   |   Esperado: HTTP 200
+    $ curl -s -o /dev/null -m 5 -w "HTTP %{http_code}\n" http://rrhh.educloud.local
+    HTTP 200
+
+=== Prueba 5: TI accede a la intranet
+    Desde: qr-vm-ti-01   |   Esperado: HTTP 200
+    $ curl -s -o /dev/null -m 5 -w "HTTP %{http_code}\n" http://rrhh.educloud.local
+    HTTP 200
+
+=== Prueba 6: Visitas NO accede a la intranet
+    Desde: qr-vm-visitas-01   |   Esperado: HTTP 000 (timeout)
+    $ curl -s -o /dev/null -m 5 -w "HTTP %{http_code}\n" http://rrhh.educloud.local
+    HTTP 000
+
+################ Visitas ################
+
+=== Prueba 7: Visitas tiene Internet (Cloud NAT)
+    Desde: qr-vm-visitas-01   |   Esperado: HTTP 200
+    $ curl -s -o /dev/null -m 5 -w "HTTP %{http_code}\n" https://www.google.com
+    HTTP 200
+
+=== Prueba 8: Visitas NO llega a Ventas
+    Desde: qr-vm-visitas-01   |   Esperado: 100% packet loss
+    $ ping -c 3 -W 2 10.20.0.10 | grep loss
+    3 packets transmitted, 0 received, 100% packet loss, time 2052ms
+
+################ TI ################
+
+=== Prueba 9: Ventas NO llega a TI
+    Desde: qr-vm-ventas-01   |   Esperado: 100% packet loss
+    $ ping -c 3 -W 2 10.20.0.130 | grep loss
+    3 packets transmitted, 0 received, 100% packet loss, time 2033ms
+
+=== Prueba 10: DC NO llega a TI
+    Desde: qr-vm-dc-01   |   Esperado: 100% packet loss
+    $ ping -c 3 -W 2 10.20.0.130 | grep loss
+    3 packets transmitted, 0 received, 100% packet loss, time 2056ms
+
+=== Prueba 11: TI llega a Ventas
+    Desde: qr-vm-ti-01   |   Esperado: 0% packet loss
+    $ ping -c 3 -W 2 10.20.0.10 | grep loss
+    3 packets transmitted, 3 received, 0% packet loss, time 2021ms
+
+=== Prueba 12: TI llega a Visitas
+    Desde: qr-vm-ti-01   |   Esperado: 0% packet loss
+    $ ping -c 3 -W 2 10.20.0.70 | grep loss
+    3 packets transmitted, 3 received, 0% packet loss, time 2019ms
+
+=== Prueba 13: TI llega a Data Center
+    Desde: qr-vm-ti-01   |   Esperado: 0% packet loss
+    $ ping -c 3 -W 2 10.20.0.162 | grep loss
+    3 packets transmitted, 3 received, 0% packet loss, time 2027ms
+
+=== Prueba 14: TI llega a la DMZ
+    Desde: qr-vm-ti-01   |   Esperado: 0% packet loss
+    $ ping -c 3 -W 2 10.20.0.178 | grep loss
+    3 packets transmitted, 3 received, 0% packet loss, time 2010ms
+
+################ DMZ y web publica ################
+
+=== Prueba 15: HTTP redirige a HTTPS
+    Desde: cloudshell   |   Esperado: 301 + Location: https://...
+    $ curl -sI http://educloud.dulceambrosio.me | grep -Ei '^(HTTP|location)'
+    HTTP/1.1 301 Moved Permanently
+    Location: https://educloud.dulceambrosio.me/
+
+=== Prueba 16: HTTPS con certificado valido
+    Desde: cloudshell   |   Esperado: HTTP/2 200, server: nginx sin version, HSTS
+    $ curl -sI https://educloud.dulceambrosio.me | grep -Ei '^(HTTP|server|strict)'
+    HTTP/2 200 
+    server: nginx
+    strict-transport-security: max-age=86400
+
+=== Prueba 17: Emisor del certificado
+    Desde: cloudshell   |   Esperado: Let's Encrypt + fecha de vencimiento
+    $ echo | openssl s_client -connect educloud.dulceambrosio.me:443 -servername educloud.dulceambrosio.me 2>/dev/null | openssl x509 -noout -issuer -enddate
+    issuer=C = US, O = Let's Encrypt, CN = YE2
+    notAfter=Feb  2 00:30:40 2027 GMT
+
+=== Prueba 18: DMZ NO llega a la intranet
+    Desde: qr-vm-web-dmz   |   Esperado: HTTP 000 (timeout)
+    $ curl -s -o /dev/null -m 5 -w "HTTP %{http_code}\n" http://10.20.0.163
+    HTTP 000
+
+=== Prueba 19: DMZ NO llega al DNS interno
+    Desde: qr-vm-web-dmz   |   Esperado: 100% packet loss
+    $ ping -c 3 -W 2 10.20.0.162 | grep loss
+    3 packets transmitted, 0 received, 100% packet loss, time 2038ms
+
+################ Hardening ################
+
+=== Prueba 20: UFW activo en la web publica
+    Desde: qr-vm-web-dmz   |   Esperado: Status: active
+    $ sudo ufw status | head -1
+    Status: active
+
+=== Prueba 21: SSH sin root ni contrasenas
+    Desde: qr-vm-intranet   |   Esperado: no / no
+    $ sudo sshd -T | grep -E '^(permitrootlogin|passwordauthentication) '
+    permitrootlogin no
+    passwordauthentication no
+
+=== Prueba 22: Solo la DMZ tiene IP publica
+    Desde: cloudshell   |   Esperado: Solo qr-vm-web-dmz con 35.255.179.44
+    $ gcloud compute instances list --format='table(name,networkInterfaces[0].accessConfigs[0].natIP:label=IP_PUBLICA)'
+    NAME: qr-vm-dc-01
+    IP_PUBLICA: 
+    
+    NAME: qr-vm-intranet
+    IP_PUBLICA: 
+    
+    NAME: qr-vm-ti-01
+    IP_PUBLICA: 
+    
+    NAME: qr-vm-ventas-01
+    IP_PUBLICA: 
+    
+    NAME: qr-vm-ventas-02
+    IP_PUBLICA: 
+    
+    NAME: qr-vm-visitas-01
+    IP_PUBLICA: 
+    
+    NAME: qr-vm-web-dmz
+    IP_PUBLICA: 35.255.179.44
+
+Total de pruebas: 22
